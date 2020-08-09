@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar animated color="warning">
+        <ion-buttons routerLink="../buscarmovies" slot="start">
+            <ion-back-button defaultHref="buscarmovies"></ion-back-button>
+        </ion-buttons>
+        <ion-title color="dark">DETALLE</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content animated color="dark">
+    <ion-card animated color="dark">
+        <ion-card-header>
+
+            <ion-img *ngIf="detailMovies.poster_path==null" height="400" width="100%" src="assets/img/imagen.png">
+            </ion-img>
+
+            <ion-img *ngIf="detailMovies.poster_path" height="400" width="100%" src="https://image.tmdb.org/t/p/original/{{detailMovies.poster_path}}">
+            </ion-img>
+
+            <ion-card-subtitle>
+                <ion-chip color="warning" *ngFor="let item of detailMovies.genres">
+                    {{item.name }}
+                </ion-chip>
+            </ion-card-subtitle>
+
+            <ion-card-title>{{detailMovies.original_title}}
+                <ion-icon name="star-outline" color="warning"></ion-icon>
+            </ion-card-title>
+
+        </ion-card-header>
+
+        <ion-card-content>
+            {{detailMovies.overview}}
+            <ion-icon (click)="verComent()" style="font-size: 18px !important" slot="end" color="warning" name="chatbubble-ellipses-outline"></ion-icon>
+
+            <div>
+
+                <ion-button color="warning" [routerLink]="['../../video-movie', idMovie ]">
+                    <ion-icon name="play-circle-outline"></ion-icon>
+                    TRAILER</ion-button>
+            </div>
+
+            <div *ngIf="verComentario">
+                <ion-item>
+                    <ion-label style="color:black;" position="floating">Nombre</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label style="color:black;" position="floating">Descripción</ion-label>
+                    <ion-input></ion-input>
+                </ion-item>
+                <ion-button type="" color="warning">ENVIAR</ion-button>
+            </div>
+
+        </ion-card-content>
+    </ion-card>
+</ion-content>

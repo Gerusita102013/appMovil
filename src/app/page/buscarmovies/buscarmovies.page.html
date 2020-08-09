@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar>
+        <p>
+            <ion-title class="ion-text-center" color="dark">BUSCAR PELICULAS</ion-title>
+
+            <ion-buttons slot="start">
+                <ion-back-button defaultHref="/home"></ion-back-button>
+                <ion-searchbar [(ngModel)]="peli" animated color="warning" (keyup.enter)="getMovies()"></ion-searchbar>
+            </ion-buttons>
+        </p>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item [routerLink]="['../detail/', item.id]" *ngFor="let item of listMovies" animated color="dark">
+            <ion-label animated color="warning">
+                {{item.original_title}}
+            </ion-label>
+            <ion-chip color="warning">{{item.popularity}}</ion-chip>
+
+            <ion-thumbnail slot="start" *ngIf="item.poster_path==null">
+                <img src="assets/img/imagen.png">
+            </ion-thumbnail>
+            <ion-thumbnail slot="start" *ngIf="item.poster_path">
+                <img src="https://image.tmdb.org/t/p/original/{{item.poster_path}}">
+            </ion-thumbnail>
+        </ion-item>
+
+        <div *ngIf="listMovies.length > 0 else noexiste"></div>
+        <ng-template #noexiste>
+            <ion-label>
+                <h2>---NO HAY PELICULAS---</h2>
+            </ion-label>
+        </ng-template>
+    </ion-list>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="getMovies($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+
+</ion-content>

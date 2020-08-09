@@ -1,0 +1,21 @@
+<ion-header>
+    <ion-toolbar animated color="warning">
+        <ion-buttons routerLink="../detail" slot="start">
+            <ion-back-button defaultHref="detail"></ion-back-button>
+        </ion-buttons>
+        <ion-title>TRAILER</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let item of traileMovie.results">
+            <ion-label>
+                {{item.original_title}}
+                <a style="color:black;" href="https://www.youtube.com/watch?v={{item.key}}">{{item.name}}</a>
+            </ion-label>
+
+            <ion-button color="danger" href="https://www.youtube.com/watch?v={{item.key}}">{{item.site}}</ion-button>
+        </ion-item>
+    </ion-list>
+</ion-content>
