@@ -7,3 +7,18 @@ ion-searchbar {
 ion-title {
     margin-top: 15px;
 }
+
+.oscuro {
+    --ion-background-color: #000000;
+}
+
+.blanco {
+    --ion-background-color: #ffffff;
+}
+
+.vertical-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}

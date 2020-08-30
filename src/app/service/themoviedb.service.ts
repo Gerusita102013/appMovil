@@ -41,4 +41,14 @@ export class ThemoviedbService {
     })
   }
 
+  Populares(page:number) {
+    let  url = 'https://api.themoviedb.org/3/movie/popular?api_key=40c68044240c61abae9b6e85ee409414&language=en-US&page='+page;
+    return new Promise ((resolve, reject) => {
+      this.http.get(url).subscribe(res => {
+        resolve(res);
+      }, error => {
+        reject(error);
+      });
+    });
+  }
 }

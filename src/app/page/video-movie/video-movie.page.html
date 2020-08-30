@@ -1,21 +1,53 @@
 <ion-header>
     <ion-toolbar animated color="warning">
-        <ion-buttons routerLink="../detail" slot="start">
+        <ion-buttons routerLink="detail" slot="start">
             <ion-back-button defaultHref="detail"></ion-back-button>
         </ion-buttons>
-        <ion-title>TRAILER</ion-title>
+        <ion-title style=" font: oblique bold 150% cursive; color: black;">Trailer</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="oscuro">
     <ion-list>
         <ion-item *ngFor="let item of traileMovie.results">
             <ion-label>
                 {{item.original_title}}
-                <a style="color:black;" href="https://www.youtube.com/watch?v={{item.key}}">{{item.name}}</a>
+                <a style=" color:aliceblue; " href="https://www.youtube.com/watch?v={{item.key}} ">{{item.name}}</a>
             </ion-label>
 
-            <ion-button color="danger" href="https://www.youtube.com/watch?v={{item.key}}">{{item.site}}</ion-button>
+            <ion-button fill="outline" color="warning " href="https://www.youtube.com/watch?v={{item.key}} ">
+                <ion-icon name="logo-youtube"></ion-icon>&nbsp;{{item.site}}</ion-button>
         </ion-item>
     </ion-list>
 </ion-content>
+
+<ion-item class="oscuro">
+    <ion-grid>
+        <div class="vertical-center">
+            <ion-row>
+                <ion-col size="12">
+                    <div>
+                        <ion-footer>
+                            <ion-segment scrollable value="home" color="warning">
+                                <ion-segment-button value="home" [routerLink]="['../../../home/', name]" style=color:yellow>
+                                    <ion-icon name="home-sharp"></ion-icon>
+                                    <ion-label>INICIO</ion-label>
+                                </ion-segment-button>
+
+                                <ion-segment-button value="home" [routerLink]="['../../../buscarmovies/', name]" style=color:yellow>
+                                    <ion-icon name="search-sharp"></ion-icon>
+                                    <ion-label>BUSCAR</ion-label>
+                                </ion-segment-button>
+
+                                <ion-segment-button value="home" style=color:yellow (click)="borrar()">
+                                    <ion-icon name="exit-sharp"></ion-icon>
+                                    <ion-label>SALIR</ion-label>
+                                </ion-segment-button>
+                            </ion-segment>
+                        </ion-footer>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-grid>
+</ion-item>

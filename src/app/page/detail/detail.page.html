@@ -1,14 +1,14 @@
 <ion-header>
     <ion-toolbar animated color="warning">
-        <ion-buttons routerLink="../buscarmovies" slot="start">
-            <ion-back-button defaultHref="buscarmovies"></ion-back-button>
+        <ion-buttons [routerLink]="['../buscarmovies/', name]" slot="start">
+            <ion-back-button defaultHref="['../buscarmovies/', name]"></ion-back-button>
         </ion-buttons>
-        <ion-title color="dark">DETALLE</ion-title>
+        <ion-title style=" font: oblique bold 150% cursive; color: black;">Detalle</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content animated color="dark">
-    <ion-card animated color="dark">
+<ion-content class="oscuro">
+    <ion-card class="oscuro">
         <ion-card-header>
 
             <ion-img *ngIf="detailMovies.poster_path==null" height="400" width="100%" src="assets/img/imagen.png">
@@ -17,42 +17,83 @@
             <ion-img *ngIf="detailMovies.poster_path" height="400" width="100%" src="https://image.tmdb.org/t/p/original/{{detailMovies.poster_path}}">
             </ion-img>
 
-            <ion-card-subtitle>
+            <ion-card-subtitle class="vertical-center">
                 <ion-chip color="warning" *ngFor="let item of detailMovies.genres">
                     {{item.name }}
                 </ion-chip>
+
             </ion-card-subtitle>
+            <div>
+                <ion-chip color="light">
+                    <label style="color:aliceblue; font: oblique bold 100% ;">Fecha de Estreno:</label>{{detailMovies.release_date | date: 'fullDate'}}
+                </ion-chip>
+            </div>
 
-            <ion-card-title>{{detailMovies.original_title}}
-                <ion-icon name="star-outline" color="warning"></ion-icon>
-            </ion-card-title>
-
+            <p>
+                <ion-card-subtitle>
+                    <ion-card-title style="color:yellow; font: oblique bold 150% cursive;">{{detailMovies.original_title }}
+                        <ion-icon name="star-outline" color="warning"></ion-icon>
+                    </ion-card-title>
+                </ion-card-subtitle>
+            </p>
         </ion-card-header>
 
-        <ion-card-content>
+        <ion-card-content style="color: rgb(253, 253, 253); text-align:justify">
             {{detailMovies.overview}}
             <ion-icon (click)="verComent()" style="font-size: 18px !important" slot="end" color="warning" name="chatbubble-ellipses-outline"></ion-icon>
 
-            <div>
 
-                <ion-button color="warning" [routerLink]="['../../video-movie', idMovie ]">
+            <div *ngIf="verComentario" class="blanco">
+                <ion-item lines="none" style="border-top-style:solid 10 px;">
+                    {{name}}
+                </ion-item>
+
+                <ion-item lines="none" style="border-top-style:solid; ">
+                    <ion-label style="color:black;" position="floating">Comentario</ion-label>
+                    <ion-input [(ngModel)]="descripcion"></ion-input>
+                </ion-item>
+                <div class="vertical-center">
+                    <ion-button fill="outline" type="" (click)="enviar()" color="warning">
+                        <ion-icon name="save-outline"></ion-icon>&nbsp;ENVIAR</ion-button>
+                </div>
+            </div>
+
+            <div class="vertical-center">
+                <ion-button fill="outline" color="warning" [routerLink]="['/video-movie/', idMovie, name]">
                     <ion-icon name="play-circle-outline"></ion-icon>
-                    TRAILER</ion-button>
+                    &nbsp;TRAILER</ion-button>
             </div>
-
-            <div *ngIf="verComentario">
-                <ion-item>
-                    <ion-label style="color:black;" position="floating">Nombre</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label style="color:black;" position="floating">Descripción</ion-label>
-                    <ion-input></ion-input>
-                </ion-item>
-                <ion-button type="" color="warning">ENVIAR</ion-button>
-            </div>
-
         </ion-card-content>
     </ion-card>
 </ion-content>
+
+<ion-item class="oscuro">
+    <ion-grid>
+        <div class="vertical-center">
+            <ion-row>
+                <ion-col size="12">
+                    <div>
+                        <ion-footer>
+                            <ion-segment scrollable value="home" color="warning">
+                                <ion-segment-button value="home" [routerLink]="['../../../home/', name]" style=color:yellow>
+                                    <ion-icon name="home-sharp"></ion-icon>
+                                    <ion-label>INICIO</ion-label>
+                                </ion-segment-button>
+
+                                <ion-segment-button value="home" [routerLink]="['../../../buscarmovies/', name]" style=color:yellow>
+                                    <ion-icon name="search-sharp"></ion-icon>
+                                    <ion-label>BUSCAR</ion-label>
+                                </ion-segment-button>
+
+                                <ion-segment-button value="home" style=color:yellow (click)="borrar()">
+                                    <ion-icon name="exit-sharp"></ion-icon>
+                                    <ion-label>SALIR</ion-label>
+                                </ion-segment-button>
+                            </ion-segment>
+                        </ion-footer>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </div>
+    </ion-grid>
+</ion-item>

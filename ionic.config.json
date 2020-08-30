@@ -1,5 +1,7 @@
 {
   "name": "appMoovies",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
